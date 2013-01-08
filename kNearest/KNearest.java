@@ -24,7 +24,6 @@ public class KNearest {
 
 	HashMap<String[], String> training_data;
 	HashMap<String[], String> testing_data;
-	public int correct_classifications;
 	int k;
 	Distance dist;
 
@@ -81,7 +80,7 @@ public class KNearest {
 	}
 
 	public void test() {
-		correct_classifications = 0;
+		int correct_classifications = 0;
 		for (String[] instance : testing_data.keySet()) {
 			String c = classify(instance);
 			if (c.equalsIgnoreCase(testing_data.get(instance))){
