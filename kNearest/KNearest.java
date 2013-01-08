@@ -1,22 +1,22 @@
 package kNearest;
+/**
+ * Jan 8, 2013
+ * KNearest.java
+ */
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.TreeMap;
 
 import javax.swing.JFileChooser;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 
 /**
  * 
- * @author robert
+ * @author robert & sebastian
  * 
  */
 
@@ -85,13 +85,11 @@ public class KNearest {
 		for (String[] instance : testing_data.keySet()) {
 			String c = classify(instance);
 			if (c.equalsIgnoreCase(testing_data.get(instance))){
-				System.out.println("success");
 				correct_classifications++;
 			}
 		}
-		System.out.println(correct_classifications);
 		System.out.println("Correct: "
-				+ (correct_classifications * 1.0 / testing_data.size()));
+				+ (correct_classifications * 1.0 / testing_data.size())+"%");
 
 	}
 

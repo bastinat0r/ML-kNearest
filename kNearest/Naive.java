@@ -20,7 +20,9 @@ public class Naive implements Distance {
 				d++;
 			}
 		}
+
 		return d;
 	}
 
 }
+
