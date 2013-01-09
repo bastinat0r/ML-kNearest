@@ -12,9 +12,6 @@ package kNearest;
  */
 public class Naive implements Distance {
 
-	/* (non-Javadoc)
-	 * @see kNearest.Distance#dist(java.lang.String[], java.lang.String[])
-	 */
 	@Override
 	public double dist(String[] x, String[] y) {
 		double d = 0;
@@ -23,7 +20,9 @@ public class Naive implements Distance {
 				d++;
 			}
 		}
-		return 0;
+
+		return d;
 	}
 
 }
+
