@@ -41,6 +41,7 @@ public class KNearest {
 			training_data.remove(instance);
 		System.out.println("Training Elements: " + training_data.size());
 		System.out.println("Testing Elements: " + testing_data.size());
+		
 		test();
 	}
 
@@ -89,7 +90,8 @@ public class KNearest {
 		}
 		System.out.println("Correct: "
 				+ (correct_classifications * 1.0 / testing_data.size())+"%");
-
+		
+		printConfusionMatrix();
 	}
 
 	public void readData(File file) {
@@ -110,6 +112,34 @@ public class KNearest {
 			e.printStackTrace();
 		}
 	}
+	
+	public void printConfusionMatrix() {
+		System.out.println("Confusion Matrix:");
+		HashMap<String, HashMap<String, Integer>>classification = new HashMap<String, HashMap<String,Integer>>();
+		for(String[] instance : testing_data.keySet()) {
+			if(classification.get(testing_data.get(instance)) == null) {
+				classification.put(testing_data.get(instance), new HashMap<String, Integer>());
+				for(String[] instance2 : testing_data.keySet()) {
+					if(classification.get(testing_data.get(instance)).get(testing_data.get(instance2)) == null) {
+						classification.get(testing_data.get(instance)).put(testing_data.get(instance2), 0);
+					}
+				}
+			}
+		} // Pyramiden bauen :)
+		
+		for(String[] instance : testing_data.keySet()) {
+			HashMap<String, Integer> hm = classification.get(classify(instance));
+			hm.put(testing_data.get(instance), hm.get(testing_data.get(instance)) + 1);
+			classification.put(classify(instance), hm);
+		}
+		
+		for(String key : classification.keySet()) {
+			for(String key2 : classification.get(key).keySet()) {
+				System.out.print(classification.get(key).get(key2) + "\t");
+			}
+			System.out.println();
+		}
+	}
 
 	/**
 	 * @param args
@@ -118,7 +148,6 @@ public class KNearest {
 		JFileChooser jfc = new JFileChooser();
 		jfc.showOpenDialog(null);
 		new KNearest(jfc.getSelectedFile(), 5, new Naive());
-
 	}
 
 }
